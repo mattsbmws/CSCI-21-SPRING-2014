@@ -15,6 +15,19 @@ void unittest (string s, char c);
 
 int main (int argc, char* argv[])
 {
+	
+	string userName;
+	char programmedBefore;
+	
+	cout << "Welcome to my first program for CSCI 21!\n\n";
+	
+	cout << "What is your name?\n";
+    cin >> userName;
+    
+    cout << "Have you programmed in C++ before? (Y/N)\n";
+    cin >> programmedBefore;
+    
+	
 	// CODE HERE
 	//
 	// 1 declare a string variable named userName
@@ -43,7 +56,10 @@ int main (int argc, char* argv[])
  */
 string greet (string name)
 {
-	// CODE HERE
+	string holder;
+	holder = "Nice to meet you, ";
+    holder += name;	
+    return holder;
 }
 
 /*
@@ -56,6 +72,12 @@ string greet (string name)
  */
 string checkExperience (char hasExperience)
 {
+	if (toupper(hasExperience) == 'Y')
+	  return "Welcome back";
+	else if (toupper(hasExperience) == 'N')
+	  return "Get ready to have some fun";
+	else
+	  return "Invalid option";
 	// CODE HERE
 }
 
