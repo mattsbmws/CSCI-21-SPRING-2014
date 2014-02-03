@@ -169,7 +169,9 @@ int asciiValue (char c)
  */
 string toLower (string input)
 {
-	// CODE HERE
+	for (int i(0); i < input.length(); i++)
+	input[i] = tolower(input.at(i));
+	return input;
 }
 
 /*
@@ -179,7 +181,9 @@ string toLower (string input)
  */
 string toUpper (string input)
 {
-	// CODE HERE
+	for (int i(0); i < input.length(); i++)
+	input[i] = toupper(input.at(i));
+	return input;
 }
 
 /*
@@ -193,7 +197,7 @@ string toUpper (string input)
  */
 char getCharacter (string input, int charIndex)
 {
-	// CODE HERE
+	return input[charIndex];
 }
 
 /*
