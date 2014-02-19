@@ -1,6 +1,6 @@
 FLAGS = -Wall -Wextra -Werror -pedantic
 
-all: pc1 pc2 pc3 pc4 pc5 pc6
+all: pc1 pc2 pc3 pc4 pc5 pc6 pc7
 
 pc1: Challenge_1/pc1
 
@@ -31,4 +31,9 @@ pc6: Challenge_6/pc6
 
 Challenge_6/pc6: Challenge_6/pc6.cpp
 	g++ $(FLAGS) Challenge_6/pc6.cpp -o Challenge_6/pc6
+	
+pc7: Challenge_7/pc7
+
+Challenge_7/pc7: Challenge_7/pc7.cpp
+	g++ $(FLAGS) Challenge_7/pc7.cpp -o Challenge_7/pc7
 	
