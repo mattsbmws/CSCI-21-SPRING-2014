@@ -16,9 +16,9 @@
 
 using namespace std;
 
-void countCharacters (string foo, int& alpha, int& num);
-string upAndDown (string foo);
-int countWords (string foo);
+void countCharacters (string inputString, int& alpha, int& num);
+string upAndDown (string inputString);
+int countWords (string inputString);
 int computeAverage (int values [], int arraySize);
 int findMinValue (int values [], int arraySize);
 int findMaxValue (int values [], int arraySize);
@@ -30,11 +30,10 @@ void btassert(A assertion);
 void unittest ();
 
 //int main (int argc, char* argv[])
-int main ()
-{
-	unittest();
+int main () {
+    unittest();
 	
-	return 0;
+    return 0;
 }
 
 
@@ -45,22 +44,18 @@ int main ()
  * @param number of alpha characters
  * @param number of numeric characters
  */
-void countCharacters (string foo, int& alpha, int& num)
-{
+void countCharacters (string inputString, int& alpha, int& num) {
     alpha = 0;
     num = 0;
     
-    for (unsigned int i = 0; i < foo.length(); i++)
-        {
-            if (isdigit(foo[i]))
-                {
-                    num++;
-                }
-            else if (isalpha(foo[i]))
-                {
-                    alpha++;
-                }
+    for (unsigned int i = 0; i < inputString.length(); i++) {
+        if (isdigit(inputString[i])) {
+            num++;
+            
+        } else if (isalpha(inputString[i])) {
+            alpha++;
         }
+    }
 }
 
 /*
@@ -70,24 +65,19 @@ void countCharacters (string foo, int& alpha, int& num)
  * @param input string to capitalize
  * @return capitalized string
  */
-string upAndDown (string foo)
-{
-    bool fez = true;
+string upAndDown (string inputString) {
+    bool toggleCase = true;
     
-    for (unsigned int i = 0; i < foo.length(); i++)
-        {
-            if (fez)
-                {
-                    foo[i] = toupper(foo[i]);
-                    fez = !fez;
-                }
-            else
-                {
-                    foo[i] = tolower(foo[i]);
-                    fez = !fez;
-                }
+    for (unsigned int i = 0; i < inputString.length(); i++) {
+        if (toggleCase) {
+            inputString[i] = toupper(inputString[i]);
+            toggleCase = !toggleCase;
+            
+        } else {
+            inputString[i] = tolower(inputString[i]);
+            toggleCase = !toggleCase;
         }
-    return foo;
+    } return inputString;
 }
 
 /*
@@ -97,23 +87,18 @@ string upAndDown (string foo)
  * @param input string to count
  * @return number of words counted
  */
-int countWords (string foo)
-{
+int countWords (string inputString) {
     int wordCount = 0;
     
-    if (foo != "")
-    {
+    if (inputString != "") {
         wordCount++;
-    }
+    } 
     
-    for (unsigned int i = 0; i < foo.length(); i++)
-        {
-            if (foo[i] == ' ')
-                {
-                    wordCount++;
-                }
+    for (unsigned int i = 0; i < inputString.length(); i++) {
+        if (inputString[i] == ' ') {
+            wordCount++;
         }
-    return wordCount;
+    } return wordCount;
 }
 /*
  * Compute the average of the values in an array;
@@ -122,15 +107,12 @@ int countWords (string foo)
  * @param size of the array being used
  * @return average of all values
  */
-int computeAverage (int values [], int arraySize)
-{
+int computeAverage (int values [], int arraySize) {
     int totals = 0;
     
-    for (int i = 0; i < arraySize; i++)
-        {
-            totals += values[i];    
-        }
-    return (totals / arraySize);
+    for (int i = 0; i < arraySize; i++) {
+        totals += values[i];    
+    } return (totals / arraySize);
 }
 
 /*
@@ -140,19 +122,15 @@ int computeAverage (int values [], int arraySize)
  * @param size of the array being used
  * @return smallest of all values
  */
-int findMinValue (int values [], int arraySize)
-{
+int findMinValue (int values [], int arraySize) {
     int holder = 0;
     holder = values[0];
     
-    for (int i = 1; i < arraySize; i++)
-    {
-        if (holder > values[i])
-        {
+    for (int i = 1; i < arraySize; i++) {
+        if (holder > values[i]) {
             holder = values[i];
         }
-    }
-    return holder;
+    } return holder;
 }
 /*
  * Find the highest of the values in an array;
@@ -161,19 +139,15 @@ int findMinValue (int values [], int arraySize)
  * @param size of the array being used
  * @return largest of all values
  */
-int findMaxValue (int values [], int arraySize)
-{
+int findMaxValue (int values [], int arraySize) {
     int holder = 0;
     holder = values[0];
     
-    for (int i = 1; i < arraySize; i++)
-    {
-        if (holder < values[i])
-        {
+    for (int i = 1; i < arraySize; i++) {
+        if (holder < values[i]) {
             holder = values[i];
         }
-    }
-    return holder;
+    } return holder;
 }
 
 /*
