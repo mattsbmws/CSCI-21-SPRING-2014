@@ -27,12 +27,12 @@ class Prize
 		 * Get this Prize's name
 		 * @return a string containing this Prize's name
 		 */
-	string getName();
+	string getName() const;
 		/*
 		 * Get this Prize's value
 		 * @return an unsigned int containing this Prize's value
 		 */
-	unsigned int getValue();	
+	unsigned int getValue() const;	
 		
 	private:
 	
@@ -61,7 +61,7 @@ class SecretDoor
 		 * Get this SecretDoor's number.
 		 * @return an unsigned int containing this SecretDoor's number
 		 */
-	unsigned int getNumber();
+	unsigned int getNumber() const;
 		/*
 		 * Get this SecretDoor's Prize.
 		 * @return the Prize, by reference, "hidden behind" this SecretDoor
@@ -108,14 +108,14 @@ int main ()
 		 * Get this Prize's name
 		 * @return a string containing this Prize's name
 		 */
-	string Prize::getName() {
+	string Prize::getName() const {
 	    return name;
 	}
 		/*
 		 * Get this Prize's value
 		 * @return an unsigned int containing this Prize's value
 		 */
-	unsigned int Prize::getValue() {
+	unsigned int Prize::getValue() const {
 	    return value;
 	}
 
@@ -135,7 +135,7 @@ int main ()
 		 * Get this SecretDoor's number.
 		 * @return an unsigned int containing this SecretDoor's number
 		 */
-	unsigned int SecretDoor::getNumber() {
+	unsigned int SecretDoor::getNumber() const {
 	    return number;
 	}
 		/*
