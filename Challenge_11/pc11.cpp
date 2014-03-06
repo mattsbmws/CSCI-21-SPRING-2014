@@ -86,6 +86,11 @@ int main ()
 	return 0;
 }
 
+//
+// Grader comments 2014.03.06
+//
+// Start your indentations at column zero. No points deducted (this time!) --Rob
+//
 // CODE HERE -- FUNCTION DEFINITIONS FOR PRIZE; USE INITIALIZER SECTION FOR CONSTRUCTOR
 		/*
 		 * Constructor.
