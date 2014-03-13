@@ -75,6 +75,29 @@ int main ()
 
 // CODE HERE -- FUNCTION DEFINITIONS
 
+//
+// Grader comments 2014.03.13
+//
+// Don't duplicate the documentation.
+//
+// For fun, a slightly advanced tip: in makeDynString(), you can just do this:
+//		return new string (contents);
+// for a one-line function.
+//
+// A more advanced tip, because you seem to like advanced stuff: think about
+// a function like the one below, and how you could use it in clearDynoString(),
+// countChars(), findWord(), and replaceWord() to make your code not only more
+// robust, but more readable in the sense that rather than looking at an if()
+// and a throw, your reader can see you calling "validatePointer" and immediately
+// know (from the name of the function) what you're doing, without having to
+// look into the details of the function.
+//
+//void validatePointer(string* theString) {
+//	if(theString == 0) {
+//		throw ArrayException("NULL STRING REFERENCE");
+//	}
+//}
+//
 /*
  * Allocate memory for a dynamic string with specified contents.
  * @param contents the desired contents of the dynamic string
