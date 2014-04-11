@@ -26,8 +26,20 @@ void unittest ();
 
 int main (int, char*[])
 {
+	//
+	// Grader tip 2014.04.11
+	// Avoid names that can result in double-negatives, like
+	// setting notQuit = false. Better to use a positive name
+	// like "keepGoing". Easier to work out the logic when
+	// double-negatives are avoided.
+	//
 	bool notQuit(true);
 	
+	//
+	// Grader comments 2014.04.11
+	// Interactive test skeleton not fleshed out.
+	// Deducted 180 points.
+	//
 	do {
         CinReader reader;
     
