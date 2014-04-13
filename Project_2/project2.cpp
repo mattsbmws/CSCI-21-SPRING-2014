@@ -5,7 +5,7 @@
  *
  * Matthew Lindstrom
  * Date created: 03/17/2014
- * Last date modified: 04/04/2014
+ * Last date modified: 04/11/2014
  *
  * CinReader by J. Boyd Trolinger
  * Unit test code by J. Boyd Trolinger
@@ -24,93 +24,354 @@ template <typename X, typename A>
 void btassert(A assertion);
 void unittest ();
 
-int main (int, char*[])
-{
+/*
+ * Holds the program until the user presses enter.
+ */
+void stall();
+void clear();
+
+int main (int, char*[]) {
 	bool notQuit(true);
 	
 	do {
         CinReader reader;
-    
-        cout << "\nWelcome to Programming Project 2!\n\n"
+        clear();
+        
+        cout << "\nWelcome to Programming Project 2!\n\n";
             
-            "\n1.  Run the non-interactive unit test\n"
-	        "2.  Create a box with standard options\n"
-	        "3.  Create a box with custom options\n"
-	        "4.  Create a prize with standard options\n"
-	        "5.  Create a prize with custom options\n"
-	        "6.  Check the box number\n"
-	        "7.  Check the box color\n"
-	        "8.  Check the prize name\n"
-	        "9.  Check the prize value\n"
-	        "10. Change the box number\n"
-	        "11. Change the box color\n"
-            "12. Change the prize name\n"
-            "13. Change the prize value\n"
-	        "14. Check prize capacity of a box\n"
-	        "15. Check prize count in a box\n"
-	        "16. Add a prize to a box\n"
-	        "17. Remove a prize from a box\n"
-	        "18. Compare two prizes\n"
-	        "19. Exit the program\n\n"
+        cout << "\n1. Run the non-interactive unit test\n"
+	        "2. Create a box with standard options\n"
+	        "3. Create a box with custom options\n"
+	        "4. Exit the program\n\n"
 	        "\nWhat would you like to do? ";
 
 	    switch(reader.readInt(1, 19)) {
 	        case 1: {
 	            unittest();
+	            stall();
+	            clear();
 	            break;
 	        }
 	        case 2: {
+	            bool boxMenu(true);
+	            Box defaultBox;
+	            cout << "\nBox created with default options.\n";
+	            stall();
+	            clear();
+	            
+	            while (boxMenu) {
+	                clear();
+	                cout << "\nBox Test Menu\n\n"
+	                        "Current box number is " << 
+	                        defaultBox.getBoxNumber() << 
+	                        " in " << defaultBox.getBoxColor() << " with " <<
+	                        defaultBox.getPrizeCount() << 
+	                        " prizes filled out of " << 
+	                        defaultBox.getPrizeCapacity() << endl;
+	                
+	                cout << "\n1. Change the box number\n"
+	                         "2. Change the box color\n"
+	                         "3. Add a prize\n"
+	                         "4. Remove a prize\n"
+	                         "5. Check prizes\n"
+	                         "6. Go back\n"
+	                         
+	                         "\nWhat would you like to do? ";
+	                         
+	                         
+    	            switch (reader.readInt(1,6)) {
+	                    case 1: {
+	                        cout << "\nWhat would you like the number to be? ";
+	                        defaultBox.setBoxNumber(reader.readInt());
+	                        break;
+	                    }
+	                    
+    	                case 2: {
+    	                    cout << "\nWhat would you like the color to be? ";
+	                        defaultBox.setBoxColor(reader.readString());
+	                        break;
+	                    }
+	                    
+	                    case 3: {
+	                        unsigned int currentFreeLocation(0);
+	                        if (defaultBox.getPrizeCount() < defaultBox.getPrizeCapacity()) {
+	                            currentFreeLocation = (defaultBox.getPrizeCount() + 1);
+	                        
+	                        cout << "\nWould you like to add the default prize (y for default, n for custom)? ";
+	                            switch (toupper(reader.readChar("YyNn"))) {
+	                                case 'N': { 
+	                                    unsigned int newPrizeValue(0);
+	                                    string newPrizeName("NO NAME");
+	                                
+	                                    cout << "\nWhat should the name of the prize be? ";
+	                                    newPrizeName = reader.readString();
+	                                
+	                                    cout << "\nWhat should the value of the prize be? ";
+	                                    newPrizeValue = reader.readInt();
+	                                
+	                                    Prize customPrize(newPrizeName, newPrizeValue);
+	                                    if (defaultBox.addPrize(customPrize)) {
+                                            cout << "\nCreated custom prize in next available slot.\n";
+                                            stall();
+                                            clear();
+                                            break;
+	                                    }
+	                                    else {
+	                                        cout << "\nCouldn't create prize.\n";
+	                                        stall();
+	                                        clear();
+	                                        break;
+	                                    }
+                                        
+                                        break;
+	                            }
+	                                case 'Y': {
+	                                    Prize defaultPrize;
+	                                    if (defaultBox.addPrize(defaultPrize)) {
+	                                        cout << "\nCreated default prize in next available slot.\n";
+	                                        stall();
+	                                        clear();
+	                                        break;
+	                                    }
+	                                    else {
+	                                        cout << "\nCouldn't create prize.\n";
+	                                        stall();
+	                                        clear();
+	                                        break;
+	                                    }
+	                                }
+	                            }
+	                        }
+	                        else {
+	                            cout << "\nThe box is full to capacity\n";
+	                            stall();
+	                            clear();
+	                        }
+    	                    break;
+	                    }
+	                    
+	                    case 4: {
+	                        if (defaultBox.getPrizeCount() > 0) {
+	                        cout << "You cannot remove default prizes.\n"
+	                                "\nWhat prize would you like to remove (starting at 1)? ";
+	                            defaultBox.removePrize(reader.readInt() - 1);
+	                            break;
+	                        }
+	                        else {
+	                            cout << "\nThere are no prizes to remove;\n";
+	                            stall();
+	                            break;
+	                        }
+    	                }
+	                    
+	                    case 5: {
+	                        cout << "\n\nThere are currently " << defaultBox.getPrizeCount() << " prizes.\n";
+	                        stall();
+	                        if (defaultBox.getPrizeCount() > 0) {
+	                            for (unsigned int i(0); i < defaultBox.getPrizeCount(); ++i) {
+	                                cout << "\nPrize " << (i + 1) << " is named " << defaultBox.getPrize(i).getPrizeName() <<
+	                                " and has the value " << defaultBox.getPrize(i).getPrizeValue() << endl;
+	                            }
+	                            stall();
+	                            
+	                            unsigned int selection1(0);
+	                            unsigned int selection2(0);
+	                            
+	                            cout << "What is the first prize you would you like to check? ";
+	                            selection1 = (reader.readInt() - 1);
+	                            cout << "What is the second prize you would you like to check? ";
+	                            selection2 = (reader.readInt() - 1);
+	                            
+	                            if (defaultBox.getPrize(selection1) == defaultBox.getPrize(selection2)) {
+	                                cout << "Yep, they are the same.\n";
+	                                stall();
+	                            }
+	                            else {
+	                                cout << "Nope, they are different.\n";
+	                                stall();
+	                            }
+	                        }
+	                        break;
+    	                }
+    	                
+	                    case 6: {
+	                        boxMenu = false;
+	                        break;
+	                    }
+	                }
+	            }
 	            break;
 	        }
 	        case 3: {
+	     	    bool boxMenu(true);
+	     	    unsigned int numberChoice(0);
+	     	    string colorChoice("NO COLOR");
+	     	    unsigned int capacityChoice(0);
+	     	    
+	     	    cout << "\nCustom box setup\n\n"
+	     	            "\nWhat would you like to number the box? ";
+	     	    numberChoice = reader.readInt();
+	     	    
+	     	    cout << "\nWhat color would you like it? ";
+	     	    
+	     	    colorChoice = reader.readString();
+	     	    
+	     	    cout << "\nHow many prizes should it hold? ";
+	     	    
+	     	    capacityChoice = reader.readInt();
+	     	    
+	     	    Box customBox(numberChoice, colorChoice, capacityChoice);
+	            cout << "\nBox created with custom options.\n";
+	            stall();
+	            clear();
+	            
+	            while (boxMenu) {
+	                clear();
+	                cout << "\nBox Test Menu\n\n"
+	                        "Current box number is " << 
+	                        customBox.getBoxNumber() << 
+	                        " in " << customBox.getBoxColor() << " with " <<
+	                        customBox.getPrizeCount() << 
+	                        " prizes filled out of " << 
+	                        customBox.getPrizeCapacity() << endl;
+	                
+	                cout << "\n1. Change the box number\n"
+	                         "2. Change the box color\n"
+	                         "3. Add a prize\n"
+	                         "4. Remove a prize\n"
+	                         "5. Check prizes\n"
+	                         "6. Go back\n"
+	                         
+	                         "\nWhat would you like to do? ";
+	                         
+	                         
+    	            switch (reader.readInt(1,6)) {
+	                    case 1: {
+	                        cout << "\nWhat would you like the number to be? ";
+	                        customBox.setBoxNumber(reader.readInt());
+	                        clear();
+	                        break;
+	                    }
+	                    
+    	                case 2: {
+    	                    cout << "\nWhat would you like the color to be? ";
+	                        customBox.setBoxColor(reader.readString());
+	                        clear();
+	                        break;
+	                    }
+	                    
+	                    case 3: { 
+	                        unsigned int currentFreeLocation(0);
+	                        if (customBox.getPrizeCount() < customBox.getPrizeCapacity()) {
+	                            currentFreeLocation = (customBox.getPrizeCount() + 1);
+	                        
+	                        cout << "\nWould you like to add the default prize (y for default, n for custom)? ";
+	                            switch (toupper(reader.readChar("YyNn"))) {
+	                                case 'N': { 
+	                                    unsigned int newPrizeValue(0);
+	                                    string newPrizeName("NO NAME");
+	                                
+	                                    cout << "\nWhat should the name of the prize be? ";
+	                                    newPrizeName = reader.readString();
+	                                
+	                                    cout << "\nWhat should the value of the prize be? ";
+	                                    newPrizeValue = reader.readInt();
+	                                
+	                                    Prize customPrize(newPrizeName, newPrizeValue);
+	                                    if (customBox.addPrize(customPrize)) {
+                                            cout << "\nCreated custom prize in next available slot.\n";
+                                            stall();
+                                            clear();
+                                            break;
+	                                    }
+	                                    else {
+	                                        cout << "\nCouldn't create prize.\n";
+	                                        stall();
+	                                        clear();
+	                                        break;
+	                                    }
+                                        
+                                        break;
+	                            }
+	                                case 'Y': {
+	                                    Prize defaultPrize;
+	                                    if (customBox.addPrize(defaultPrize)) {
+	                                        cout << "\nCreated default prize in next available slot.\n";
+	                                        stall();
+	                                        clear();
+	                                        break;
+	                                    }
+	                                    else {
+	                                        cout << "\nCouldn't create prize.\n";
+	                                        stall();
+	                                        clear();
+	                                        break;
+	                                    }
+	                                }
+	                            }
+	                        }
+	                        else {
+	                            cout << "\nThe box is full to capacity\n";
+	                            stall();
+	                            clear();
+	                        }
+    	                    break;
+	                    }
+	                    
+	                    case 4: {
+	                        if (customBox.getPrizeCount() > 0) {
+	                        cout << "You cannot remove default prizes.\n"
+	                                "\nWhat prize would you like to remove (starting at 1)? ";
+	                            customBox.removePrize(reader.readInt() - 1);
+	                            break;
+	                        }
+	                        else {
+	                            cout << "\nThere are no prizes to remove;\n";
+	                            stall();
+	                            break;
+	                        }
+    	                }
+	                    
+	                    case 5: {
+	                        cout << "\n\nThere are currently " << customBox.getPrizeCount() << " prizes.\n";
+	                        stall();
+	                        
+	                        if (customBox.getPrizeCount() > 0) {
+	                            for (unsigned int i(0); i < customBox.getPrizeCount(); ++i) {
+	                                cout << "\nPrize " << (i + 1) << " is named " << customBox.getPrize(i).getPrizeName() <<
+	                                " and has the value " << customBox.getPrize(i).getPrizeValue() << endl;
+	                            }
+	                            stall();
+	                            
+	                            unsigned int selection1(0);
+	                            unsigned int selection2(0);
+	                            
+	                            cout << "What is the first prize you would you like to check? ";
+	                            selection1 = (reader.readInt() - 1);
+	                            cout << "What is the second prize you would you like to check? ";
+	                            selection2 = (reader.readInt() - 1);
+	                            
+	                            if (customBox.getPrize(selection1) == customBox.getPrize(selection2)) {
+	                                cout << "Yep, they are the same.\n";
+	                                stall();
+	                            }
+	                            else {
+	                                cout << "Nope, they are different.\n";
+	                                stall();
+	                            }
+	                        }
+	                        break;
+	                    }
+	                    case 6: {
+	                        boxMenu = false;
+	                        break;
+	                    }
+	                }
+	            }
 	            break;
 	        }
 	        case 4: {
-	            break;
-	        }
-	        case 5: {
-	            break;
-	        }
-	        case 6: {
-	            break;
-	        }
-	        case 7: {
-	            break;
-	        }
-	        case 8: {
-	            break;
-	        }
-	        case 9: {
-	            break;
-	        }
-	        case 10: {
-	            break;
-	        }
-	        case 11: {
-	            break;
-	        }
-	        case 12: {
-	            break;
-	        }
-	        case 13: {
-	            break;
-	        }
-	        case 14: {
-	            break;
-	        }
-	        case 15: {
-	            break;
-	        }
-	        case 16: {
-	            break;
-	        }
-	        case 17: {
-	            break;
-	        }
-	        case 18: {
-	            break;
-	        }
-	        case 19: {
+	            clear();
 	            notQuit = false;
 	            break;
 	        }
@@ -119,6 +380,18 @@ int main (int, char*[])
 	while (notQuit);
 	
     return 0;
+}
+
+void stall() {
+    CinReader reader;
+    cout << "(press enter to continue): ";
+    string lag(reader.readString(true));
+}
+
+void clear() {
+    for (int i(0); i < 75; ++i) {
+        cout << "\n";    
+    }
 }
 
 /*
