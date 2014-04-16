@@ -82,7 +82,7 @@ Prize Box::removePrize(unsigned int index) {
         if (holder == scratch) {
             return holder;
         }
-        prizes[index]=scratch;
+        prizes[index] = scratch;
         --prizeCount;
         for (unsigned int i = index; i < prizeCount; ++i) {
             prizes[i] = prizes[i+1];
