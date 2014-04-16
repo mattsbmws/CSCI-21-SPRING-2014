@@ -1,3 +1,9 @@
+//
+// Grader comments 2014.04.16
+// Make your function documentation look like Boyd's examples.
+// No points deducted for daily challenge but he wants me to
+// take points on the programming projects. --Rob
+//
 /*
 Declare and implement a class that provides the following interface EXACTLY.
 
