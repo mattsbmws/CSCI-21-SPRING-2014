@@ -74,24 +74,24 @@ void SList::insert (int newContents) {
 	}
 	else {
 		SLNode* trailer = NULL;
-		SLNode* spot = head;
-		while (spot->getNextNode() != NULL && newContents > spot->getContents()) {
-			trailer = spot;
-			spot = spot->getNextNode();
+		SLNode* leader = head;
+		while (leader->getNextNode() != NULL && newContents > leader->getContents()) {
+			trailer = leader;
+			leader = leader->getNextNode();
 		}
 		
-		if (spot->getNextNode() == NULL && newContents > spot->getContents()) {
+		if (leader->getNextNode() == NULL && newContents > leader->getContents()) {
 			insertTail(newContents);
 		}
 		else {
-			SLNode* nodee = new SLNode (newContents);
-			nodee->setNextNode(spot);
+			SLNode* theNode = new SLNode (newContents);
+			theNode->setNextNode(leader);
 			if (trailer == NULL) {
-				head = nodee;
+				head = theNode;
 				numNodes++;
 			}
 			else {
-			trailer->setNextNode(nodee);
+			trailer->setNextNode(theNode);
 			numNodes++;
 			}
 		}
@@ -103,21 +103,21 @@ bool SList::removeFirst (int target) {
 		return false;
 	else {
 		SLNode* trailer = NULL;
-		SLNode* spot = head;
-		while (spot != NULL && spot->getContents() != target) {
-			trailer = spot;
-			spot = spot->getNextNode();
+		SLNode* leader = head;
+		while (leader != NULL && leader->getContents() != target) {
+			trailer = leader;
+			leader = leader->getNextNode();
 		}
-		if (spot == NULL) {
+		if (leader == NULL) {
 			return false;
 		}
-		else if (spot == head) {
+		else if (leader == head) {
 			removeHead();
 			return true;
 		}
 		else {
-			trailer->setNextNode(spot->getNextNode());
-			delete spot;
+			trailer->setNextNode(leader->getNextNode());
+			delete leader;
 			--numNodes;
 			return true;
 		}
