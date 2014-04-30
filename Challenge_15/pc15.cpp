@@ -187,7 +187,6 @@ void unittest ()
 
     try {
         myList.getItem(0);
-		btassert<bool>(false);
     } catch (ArrayException e) {
         try {
             btassert<bool>(e.message == "INVALID ARRAY INDEX");
@@ -195,9 +194,7 @@ void unittest ()
         } catch (bool b) {
             cout << "# FAILED TEST 3: ShoppingList::getItem(0) EXCEPTION HANDLING #\n";
         }
-    } catch(bool b) {
-        cout << "# FAILED TEST 3: ShoppingList::getItem(0) EXCEPTION HANDLING #\n";
-	}
+    }
 
     try {
         btassert<bool>(myList.addItem("apples") == true);
@@ -283,7 +280,6 @@ void unittest ()
 
     try {
         myList.getItem(0) = "oranges";
-		btassert<bool>(false);
     } catch (ArrayException e) {
         try {
             btassert<bool>(e.message == "INVALID ARRAY INDEX");
@@ -291,8 +287,6 @@ void unittest ()
         } catch (bool b) {
             cout << "# FAILED TEST 14: string& ShoppingList::setItem(0) EXCEPTION HANDLING #\n";
         }
-    } catch(bool b) {
-        cout << "# FAILED TEST 14: string& ShoppingList::setItem(0) EXCEPTION HANDLING #\n";
     }
 
     try {

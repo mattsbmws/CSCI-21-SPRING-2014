@@ -18,11 +18,6 @@
 using namespace std;
 
 
-//
-// Grader comments 2014.04.11
-// Need full documentation on functions in headers.
-// Deducted 10 points.
-//
 class Box {
     public:
         /* 

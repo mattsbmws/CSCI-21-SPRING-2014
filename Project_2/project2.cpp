@@ -31,7 +31,7 @@ void stall();
 void clear();
 
 int main (int, char*[]) {
-	bool notQuit(true);
+	bool keepGoing(true);
 	
 	do {
         CinReader reader;
@@ -93,9 +93,9 @@ int main (int, char*[]) {
 	                    }
 	                    
 	                    case 3: {
-	                        unsigned int currentFreeLocation(0);
+	                       // unsigned int currentFreeLocation(0);
 	                        if (defaultBox.getPrizeCount() < defaultBox.getPrizeCapacity()) {
-	                            currentFreeLocation = (defaultBox.getPrizeCount() + 1);
+	                          //  currentFreeLocation = (defaultBox.getPrizeCount() + 1);
 	                        
 	                        cout << "\nWould you like to add the default prize (y for default, n for custom)? ";
 	                            switch (toupper(reader.readChar("YyNn"))) {
@@ -261,9 +261,9 @@ int main (int, char*[]) {
 	                    }
 	                    
 	                    case 3: { 
-	                        unsigned int currentFreeLocation(0);
+	                       // unsigned int currentFreeLocation(0);
 	                        if (customBox.getPrizeCount() < customBox.getPrizeCapacity()) {
-	                            currentFreeLocation = (customBox.getPrizeCount() + 1);
+	                           // currentFreeLocation = (customBox.getPrizeCount() + 1);
 	                        
 	                        cout << "\nWould you like to add the default prize (y for default, n for custom)? ";
 	                            switch (toupper(reader.readChar("YyNn"))) {
@@ -372,12 +372,12 @@ int main (int, char*[]) {
 	        }
 	        case 4: {
 	            clear();
-	            notQuit = false;
+	            keepGoing = false;
 	            break;
 	        }
 	    }
 	}
-	while (notQuit);
+	while (keepGoing);
 	
     return 0;
 }
