@@ -5,9 +5,7 @@
  *
  * Matthew Lindstrom
  * Date created: 04/16/2014
- * Last date modified: 04/21/2014
- *
- * Unit test code by J. Boyd Trolinger
+ * Last date modified: 04/30/2014
  */
 
 #include "DLNode.h"

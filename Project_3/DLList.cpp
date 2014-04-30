@@ -5,9 +5,7 @@
  *
  * Matthew Lindstrom
  * Date created: 04/16/2014
- * Last date modified: 04/21/2014
- *
- * Unit test code by J. Boyd Trolinger
+ * Last date modified: 04/30/2014
  */
 
 #include "DLList.h"
@@ -22,14 +20,15 @@ DLList::~DLList () {
 
 void DLList::pushFront (int value) {
 	DLNode* theNode = new DLNode(value);
-	theNode->setNext(head);
-	head=theNode;
+	theNode -> setNext(head);
+	head = theNode;
 	++numNodes;
 
-	if(numNodes==1)
+	if(numNodes == 1) {
 		tail = head;
-	else
-		head->getNext()->setPrevious(head);
+	} else {
+		head -> getNext() -> setPrevious(head);
+	}
 }
 
 void DLList::popFront () {
@@ -37,37 +36,34 @@ void DLList::popFront () {
 		head = NULL;
 		--numNodes;
 	}
+	
 	if (head != NULL && numNodes > 1) {
-		DLNode* temp = head;
-		head = head->getNext();
-		delete temp;
+		head = head -> getNext();
+		delete head -> getPrevious();
+		head -> setPrevious(NULL);
 		--numNodes;
-
-	//	head->getNext()->setPrevious(head);
-		
 	}
 }
 
 int DLList::getFront () const {
 	if (head == NULL) {
 		throw ListException();
-	}
-	else {
-		return head->getContents();
+	} else {
+		return head -> getContents();
 	}
 }
 
 void DLList::pushBack (int contents) {
 	DLNode* theNode = new DLNode(contents);
-        theNode->setPrevious(tail);
-        tail=theNode;
-        ++numNodes;
+	theNode -> setPrevious(tail);
+	tail = theNode;
+	++numNodes;
 
-        if(numNodes==1)
-                head = tail;
-        else
-                tail->getPrevious()->setNext(tail);
-
+	if(numNodes == 1) {
+		head = tail;
+	} else {
+		tail -> getPrevious() -> setNext(tail);
+	}
 }
 
 void DLList::popBack () {
@@ -75,45 +71,45 @@ void DLList::popBack () {
 		tail = NULL;
 		--numNodes;
 	}
+	
 	if (tail != NULL && numNodes > 1) {
-                DLNode* temp = tail;
-                tail = tail->getPrevious();
-                delete temp;
-                --numNodes;
-        //        tail->getPrevious()->setNext(tail);
+		tail = tail -> getPrevious();
+		delete head -> getNext();
+		tail -> setNext(NULL);
+		--numNodes;
 	}
 }
 
 int DLList::getBack () const {
 	if (head == NULL) {
-                throw ListException();
-        }   
-        else {
-                return tail->getContents();
+		throw ListException();
+    } else {
+        return tail -> getContents();
 	}
 }   
 
 
 void DLList::insert (int newContents) {
-	if(head == NULL || head->getContents() > newContents)
+	if(head == NULL || head->getContents() > newContents) {
 		pushFront(newContents);
-    
+	}
 	DLNode* iterator = head;
+	
 	while(iterator !=NULL) {
-        	if( iterator->getContents() > newContents) {
-   	        	DLNode* temp = iterator->getPrevious();
-        	 	DLNode* inserted = new DLNode(newContents);
-            
-            	 	inserted->setNext(iterator);
-            	 	iterator->setPrevious(inserted);
+		if( iterator -> getContents() > newContents) {
+			DLNode* temp = iterator -> getPrevious();
+			DLNode* inserted = new DLNode(newContents);
+		
+			inserted->setNext(iterator);
+			iterator->setPrevious(inserted);
 
-               	 	inserted->setPrevious(temp);
-            	 	temp->setNext(inserted);
-            
-            	 	++numNodes;
-                 	return;
+			inserted->setPrevious(temp);
+			temp->setNext(inserted);
+	
+			++numNodes;
+			return;
 		}
-		iterator = iterator->getNext();
+		iterator = iterator -> getNext();
 	}
 	pushBack(newContents);
 }
@@ -124,10 +120,11 @@ bool DLList::get(int target) {
 		return false;
 	}
 	DLNode* temp = head;
+	
 	while (temp != NULL) {
-		if (temp->getContents() == target)
+		if (temp -> getContents() == target)
 			return true;
-		temp = temp->getNext();
+		temp = temp -> getNext();
 	}
 	return false;
 }
@@ -135,23 +132,22 @@ bool DLList::get(int target) {
 bool DLList::removeFirst (int target) {
 	if (head == NULL)
 		return false;
+		
 	else {
 		DLNode* iterator = head;
+		
 		while (iterator != NULL && iterator->getContents() != target) {
 			iterator = iterator->getNext();
-		}
+		} 
 		if (iterator == NULL) {
 			return false;
-		}
-		else if (iterator == head) {
+		} else if (iterator == head) {
 			popFront();
 			return true;
-		}
-		else if (iterator == tail) {
+		} else if (iterator == tail) {
 			popBack();
 			return true;
-		}
-		else {
+		} else {
 			iterator->getPrevious()->setNext(iterator->getNext());
 			iterator->getNext()->setPrevious(iterator->getPrevious());
 			delete iterator;
