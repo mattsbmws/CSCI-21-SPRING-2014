@@ -64,7 +64,7 @@ class DLList {
 		 * @param target an int containing the value to be searched for.
 		 * @return true if value exists in list and is removed, false if not.
 		 */
-		bool get(int target);
+		bool get(int target) const;
 		/*
 		 * Removes the first instance of a value in the list.
 		 * @param target an int containing the value to be searched for.
@@ -96,6 +96,16 @@ class DLList {
 		DLNode* head;
 		DLNode* tail;
 		unsigned int numNodes;
+
+		//
+		// Grader comments 2014.05.14
+		// toString() creates the right string but doesn't send it to the output.
+		// -10 points 
+		//
+		friend std::ostream& operator<<(std::ostream& out, DLList const& inList) {
+			out << inList.toString();
+			return out;
+		}
 };
 
 struct ListException {
