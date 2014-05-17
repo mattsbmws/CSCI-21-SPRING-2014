@@ -41,19 +41,37 @@ unsigned int Word::getCount() const {
 }
 
 bool operator==(Word left, Word right) {
+	for(unsigned int i(0); i < left.getWord().length(); ++i) {
+		left.word[i] = toupper(left.getWord()[i]);
+	}
+	for(unsigned int j(0); j < right.getWord().length(); ++j) {
+       		right.word[j] = toupper(right.getWord()[j]);
+	}
 	return (left.getWord() == right.getWord());
 }
 
 bool operator<(Word left, Word right) {
+	for(unsigned int i(0); i < left.getWord().length(); ++i) {
+		left.word[i] = toupper(left.getWord()[i]);
+	}
+	for(unsigned int j(0); j < right.getWord().length(); ++j) {
+       		right.word[j] = toupper(right.getWord()[j]);
+	}
 	return (left.getWord() < right.getWord());
 }
 
 bool operator>(Word left, Word right) {
+	for(unsigned int i(0); i < left.getWord().length(); ++i) {
+		left.word[i] = toupper(left.getWord()[i]);
+	}
+	for(unsigned int j(0); j < right.getWord().length(); ++j) {
+       		right.word[j] = toupper(right.getWord()[j]);
+	}
 	return (left.getWord() > right.getWord());
 }
 
-ostream& operator<<(ostream& out, Word theWord) {
-	out << theWord.getWord();
+ostream& operator<<(ostream& out, Word wordIn) {
+	out << wordIn.getWord() << " " << wordIn.getCount();
 	return out;
 }
 
