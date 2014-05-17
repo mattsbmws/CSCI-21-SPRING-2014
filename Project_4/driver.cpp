@@ -91,19 +91,17 @@ int main (int argc, char* argv[]) {
 			case 'I': {
 				if (tree == NULL) {
 					cout << "MUST CREATE TREE INSTANCE" << endl;
-					break;
 					
 				} else {
 					if (tree -> insert(theString)) {
 						cout << "WORD " << theString << " INSERTED" << endl;
-						break;
 
 					} else {
 						cout << "WORD " << theString << " INCREMENTED" << endl;
 						tree -> get(theString) -> incrementCount();
-						break;
 					}	
 				}
+				break;
 			}
 	
 			case 'F': {

@@ -149,7 +149,8 @@ class BSTree {
 				return get(data, tempRoot -> getRightChild());
 			
 			} else {
-				T* temp(new T(tempRoot->getContents()));
+				T* temp(NULL);
+				temp= &tempRoot -> getContents();
 				return temp;
 			}
 		}
