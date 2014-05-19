@@ -21,7 +21,7 @@ class BSTree {
 		:root(NULL), size(0)
 		{}
 
-		~BSTree() {
+		virtual ~BSTree() {
 			clear();
 		}
 
@@ -41,7 +41,7 @@ class BSTree {
 			clear(root);
 		}
 
-		BSTNode<T>*& get(T data) {
+		T* get(T data) {
 			return get(data, root);
 		}
 		
@@ -54,7 +54,7 @@ class BSTree {
 		}
 		
 		void reverseOrder() {
-			ReverseOrder(root);
+			reverseOrder(root);
 		}
 				
 	private:
@@ -79,10 +79,10 @@ class BSTree {
 			if (tempRoot == NULL) {
 				return false;
 				
-			} else if (data < tempRoot) {
+			} else if (data < tempRoot -> getContents()) {
 				return find(data, tempRoot -> getLeftChild());
 			
-			} else if (data > tempRoot) {
+			} else if (data > tempRoot -> getContents()) {
 				return find(data, tempRoot -> getRightChild());
 			
 			} else {
@@ -122,6 +122,7 @@ class BSTree {
 				tempRoot = tempRoot -> getLeftChild();
 				delete oldRoot;
 				oldRoot = NULL;
+
 			} else {
 				removeMax (data, tempRoot -> getRightChild());
 			}
@@ -137,37 +138,40 @@ class BSTree {
 			}
 		}
 		
-		BSTNode<T>*& get(T data, BSTNode<T>*& tempRoot) {
+		T* get(T data, BSTNode<T>*& tempRoot) {
 			if (tempRoot == NULL) {
-				return false;
+				return NULL;
 				
-			} else if (data < tempRoot) {
-				return find(data, tempRoot -> getLeftChild());
+			} else if (data < tempRoot -> getContents()) {
+				return get(data, tempRoot -> getLeftChild());
 			
-			} else if (data > tempRoot) {
-				return find(data, tempRoot -> getRightChild());
+			} else if (data > tempRoot -> getContents()) {
+				return get(data, tempRoot -> getRightChild());
 			
 			} else {
-				return tempRoot;
+				T* temp(NULL);
+				temp= &tempRoot -> getContents();
+				return temp;
 			}
 		}
 		
 		void inOrder(BSTNode<T>*& tempRoot) {
 			if (tempRoot != NULL) {
 				inOrder(tempRoot -> getLeftChild());
-				cout << (tempRoot -> getContents()) << " ";
+				cout << (tempRoot -> getContents()) << endl;
 				inOrder(tempRoot -> getRightChild());
 			}
 		}
 		
 		void reverseOrder(BSTNode<T>*& tempRoot) {
 			if (tempRoot != NULL) {
-				inOrder(tempRoot -> getRightChild());
-				cout << (tempRoot -> getContents()) << " ";
-				inOrder(tempRoot -> getLeftChild());
+				reverseOrder(tempRoot -> getRightChild());
+				cout << (tempRoot -> getContents()) << endl;
+				reverseOrder(tempRoot -> getLeftChild());
 			}
 		}
 		
 		BSTNode<T>* root;
 		unsigned int size;
 };
+

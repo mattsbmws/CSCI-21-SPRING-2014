@@ -14,3 +14,68 @@ R hello
 N
 X
 D
+#
+X
+D
+I tree
+F house
+R tree
+G house
+N
+O
+E
+C
+D
+C
+R tree
+F tree
+G tree
+X
+N
+O
+E
+I hello
+I Hello
+I heLLo
+I HELLO
+G hello
+F HELLO
+G test
+f help
+F help
+N
+O
+I red
+I red
+I REd
+I RED
+O
+N
+I BLUE
+I blue
+I blue
+O
+N
+I green
+I GrEeN
+O
+N
+I black
+I brown
+I aaa
+I aAa
+I bb
+I BB
+O
+E
+N
+G hello
+I hello
+G hello
+N
+F hello
+F goodbye
+R hello
+N
+X
+D

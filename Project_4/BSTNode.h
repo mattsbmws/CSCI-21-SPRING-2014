@@ -24,16 +24,12 @@ class BSTNode {
 		:leftChild(NULL), rightChild(NULL), contents(newContents)
 		{}
 
-		~BSTNode() {
+		virtual ~BSTNode() {
 			leftChild = rightChild = NULL;
 		}
 
 		void setContents (T newContents) {
 			contents = newContents;
-		}
-
-		T getContents() const {
-			return contents;
 		}
 
 		T& getContents() {
@@ -48,16 +44,8 @@ class BSTNode {
 			rightChild = newChild;
 		}
 
-		BSTNode<T>* getLeftChild() const {
-			return leftChild;
-		}
-
 		BSTNode<T>*& getLeftChild() {
 			return leftChild;
-		}
-
-		BSTNode<T>* getRightChild() const {
-			return rightChild;
 		}
 
 		BSTNode<T>*& getRightChild() {
@@ -69,3 +57,4 @@ class BSTNode {
 		BSTNode<T>* rightChild;
 		T contents;
 };
+
