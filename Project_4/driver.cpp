@@ -1,3 +1,7 @@
+//
+// Grader comments 2014.05.21
+// -10 points total
+//
 /*
  * Programming Project 4
  * CSCI21 Programming Project Spring 2014
@@ -42,7 +46,6 @@ int main (int argc, char* argv[]) {
 		command = command.substr(1);
 		stringstream ss(command);
 		ss >> theString;
-				
 		switch (letter) {
 			case '#': {
 				break;
@@ -131,6 +134,13 @@ int main (int argc, char* argv[]) {
 
 				} else if (tree -> getSize() == 0) {
 					cout << "TREE EMPTY" << endl;
+					
+					//
+					// Grader comments 2014.05.21
+					// Missing 'break' here; program falls through to
+					// the 'G' case.
+					// -5 points
+					break;	// Rob
 
 				} else {
 					if (tree -> remove(theString)) {
@@ -151,6 +161,13 @@ int main (int argc, char* argv[]) {
 
 				} else if (tree -> getSize() == 0) {
 					cout << "TREE EMPTY" << endl;
+					
+					//
+					// Grader comments 2014.05.21
+					// Missing 'break' here; program falls through to
+					// the 'N' case.
+					// -5 points
+					break;	// Rob
 
 				} else {
 					if (tree -> get(theString) == NULL) {
