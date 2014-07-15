@@ -1,3 +1,7 @@
+//
+// Grader comments 2014.05.14
+// -30 points total
+
 /*
  * Programming Project 3
  * CSCI21 Programming Project Spring 2014
@@ -31,8 +35,15 @@ void DLList::pushFront (int value) {
 	}
 }
 
+//
+// Grader comments 2014.05.14
+// Doesn't delete the popped node when there's only one node on the list.
+// Doesn't manage tail when necessary.
+// -10 points
+//
 void DLList::popFront () {
 	if (head != NULL && numNodes == 1) {
+		delete head;	// Rob
 		head = NULL;
 		--numNodes;
 	}
@@ -42,6 +53,13 @@ void DLList::popFront () {
 		delete head -> getPrevious();
 		head -> setPrevious(NULL);
 		--numNodes;
+	}
+	
+	// Rob
+	if(numNodes == 1) {
+		tail = head;
+	} else if(numNodes == 0) {
+		tail = 0;
 	}
 }
 
@@ -66,17 +84,33 @@ void DLList::pushBack (int contents) {
 	}
 }
 
+//
+// Grader comments 2014.05.14
+// Doesn't delete the popped node when there's only one node on the list.
+// Deletes the wrong node.
+// Doesn't manage head when necessary.
+// -20 points
+//
 void DLList::popBack () {
 	if (tail != NULL && numNodes == 1) {
+		delete tail;	// Rob
 		tail = NULL;
 		--numNodes;
 	}
 	
 	if (tail != NULL && numNodes > 1) {
 		tail = tail -> getPrevious();
-		delete head -> getNext();
+		//delete head -> getNext();	// Rob
+		delete tail->getNext();	// Rob
 		tail -> setNext(NULL);
 		--numNodes;
+	}
+	
+	// Rob
+	if(numNodes == 1) {
+		head = tail;
+	} else if(numNodes == 0) {
+		head = 0;
 	}
 }
 
@@ -115,7 +149,7 @@ void DLList::insert (int newContents) {
 }
 
 	
-bool DLList::get(int target) {
+bool DLList::get(int target) const {
 	if (head == NULL) {
 		return false;
 	}

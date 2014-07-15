@@ -49,6 +49,12 @@ int main (int argc, char* argv[]) {
 				break;
 			}
 			case 'X': {
+				//
+				// Grader comments 2014.05.12
+				// An 'X' immediately after a 'D', as in the sample
+				// file, should result in a 'MUST CREATE LIST INSTANCE'
+				// message, because there is no more list. -10 points
+				//
 				list->clear();
 				cout << "LIST CLEARED" << endl;
 				break;
